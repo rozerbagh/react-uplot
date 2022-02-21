@@ -7,7 +7,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = env => {
-    const {framework, example, frameworkVersion = ''} = env;
+    const { framework, example, frameworkVersion = '' } = env;
     const vue3 = frameworkVersion == '3';
     const entry = {
         [`uplot-${framework}`]: `./${framework}/uplot-${framework}`
@@ -38,11 +38,11 @@ module.exports = env => {
                 use: [
                     {
                         loader: 'babel-loader',
-                        options: {presets: ['@babel/preset-react', ['@babel/preset-env', {targets}]]}
+                        options: { presets: ['@babel/preset-react', ['@babel/preset-env', { targets }]] }
                     },
                     {
                         loader: 'ts-loader',
-                        options: {configFile: path.join(__dirname, 'react', 'tsconfig.json'), context: __dirname}
+                        options: { configFile: path.join(__dirname, 'react', 'tsconfig.json'), context: __dirname }
                     }
                 ]
             }, {
@@ -52,20 +52,20 @@ module.exports = env => {
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: [['@babel/preset-env', {targets}], ...(!vue3 ? ['@vue/babel-preset-jsx'] : [])],
+                            presets: [['@babel/preset-env', { targets }], ...(!vue3 ? ['@vue/babel-preset-jsx'] : [])],
                             plugins: vue3 ? ['@vue/babel-plugin-jsx'] : []
                         }
                     },
                     {
                         loader: 'ts-loader',
-                        options: {configFile: path.join(__dirname, 'vue', 'tsconfig.json'), context: __dirname}
+                        options: { configFile: path.join(__dirname, 'vue', 'tsconfig.json'), context: __dirname }
                     }
                 ]
             }, {
                 test: /\.js$/,
                 use: [{
                     loader: 'babel-loader',
-                    options: {presets: [['@babel/preset-env']]}
+                    options: { presets: [['@babel/preset-env']] }
                 }]
             }, {
                 test: /\.css$/,
@@ -73,14 +73,14 @@ module.exports = env => {
             }]
         },
         plugins: [
-            new ESLintPlugin({extensions: ['ts', 'tsx']}),
+            new ESLintPlugin({ extensions: ['ts', 'tsx'] }),
             new CopyPlugin([
-                {from: `${framework}/types/**`, force: true, flatten: true},
-                {from: `${framework}/package.json`, force: true, flatten: true},
-                {from: 'README.md', force: true, flatten: true},
-                {from: 'LICENSE', force: true, flatten: true}
+                { from: `${framework}/types/**`, force: true, flatten: true },
+                { from: `${framework}/package.json`, force: true, flatten: true },
+                { from: 'README.md', force: true, flatten: true },
+                { from: 'LICENSE', force: true, flatten: true }
             ]),
-            new HtmlWebpackPlugin({scriptLoading: 'defer', template: `${framework}/uplot-${framework}-example.html`})
+            new HtmlWebpackPlugin({ scriptLoading: 'defer', template: `${framework}/uplot-${framework}-example.html` })
         ],
         resolve: {
             extensions: ['.ts', '.tsx', '.js'],

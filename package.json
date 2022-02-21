@@ -33,7 +33,7 @@
         "build": "concurrently 'npm run buildReact' 'npm run buildVue'",
         "buildReact": "webpack --env=framework=react",
         "buildProd": "concurrently 'npm run buildVue -- --env=mode=production' 'npm run buildReact -- --env=mode=production'",
-        "serveReact": "webpack serve --env=framework=react --env=example=true"
+        "serve": "webpack serve --env=framework=react --env=example=true"
     },
     "dependencies": {},
     "devDependencies": {
